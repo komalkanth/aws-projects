@@ -15,7 +15,19 @@ This is the AWS Org structure I have set up in my personal account and will be p
 - The subnets will initially be shared with `SAAC03-DEVELOPMENT` while the developers work on and refine the application.
 
 
-![Org Structure](images/01-org-structure.png)
+<img src="images/01-org-structure.png" alt="Org Structure" >
+
+## Infrastructure architecture
+
+- There will be 3 shared subnets deployed in az1, az2 and az3 in the Networking account that will be shared with the other accounts.
+- Each account will identify the AZs that related to the AZ-IDs az1, az2 and az3 in their own accounts to identify the right subnet and deploy resources.
+- Some common resources that can be created in the shared VPC and managed by the Networking account such as S3 buckets for logging, Route53, NAT Gateways etc will be deployed in the Networking account.
+- Other resources that will be be created in the Accounts with which the subnets are shared (*participating accounts*) will be created in those accounts.
+- Some resources that can not be directly created by participating accounts in the shared subnets may still be accessible through Privatelink and we'll do that if required.
+
+<p align="center">
+<img src="images/02-infra-structure.png" alt="Infra Structure" style="width:50%; height:auto;" >
+</p>
 
 ## Application architecture
 
