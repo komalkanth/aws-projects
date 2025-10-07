@@ -11,7 +11,7 @@ I say *loosely* because the application portion of the project has been used fro
 This is the AWS Org structure I have set up in my personal account and will be planning to use the same to deploy this project.
 
 - The VPCs and Subnets will be deployed in the `Networking` account, along with other network constructs and will be shared with other accounts, utilizing [VPC sharing](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html).
-- VPC Flowlogs and other logs will be saved in a centralized `Logging` account in the `Infra` OU, utilzing [Centralized Logging](https://docs.aws.amazon.com/prescriptive-guidance/latest/designing-control-tower-landing-zone/logging-monitoring.html).
+- VPC Flowlogs and other logs will be saved in a centralized `Logging` account in the `Infra` OU.
 - The subnets will initially be shared with `SAAC03-DEVELOPMENT` while the developers work on and refine the application.
 
 
