@@ -14,7 +14,7 @@ resource "aws_vpc" "main" {
 # Uses locals "public_subnet_set" for input
 resource "aws_subnet" "public_subnet" {
   vpc_id   = aws_vpc.main.id
-  for_each = { for subnet_input in local.public_subnet_set : "${subnet_input.cidr_block}" => subnet_input }
+  for_each = { for subnet_input in local.public_subnet_set : "${subnet_input.cidr_block}-${subnet_input.selected_az}" => subnet_input }
 
   cidr_block        = each.value.cidr_block
   availability_zone = each.value.availability_zone
@@ -31,7 +31,7 @@ resource "aws_subnet" "public_subnet" {
 # Uses locals "private_subnet_set" for input
 resource "aws_subnet" "private_subnet" {
   vpc_id   = aws_vpc.main.id
-  for_each = { for subnet_input in local.private_subnet_set : "${subnet_input.cidr_block}" => subnet_input }
+  for_each = { for subnet_input in local.private_subnet_set : "${subnet_input.cidr_block}-${subnet_input.selected_az}" => subnet_input }
 
   cidr_block        = each.value.cidr_block
   availability_zone = each.value.availability_zone
