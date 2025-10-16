@@ -48,7 +48,7 @@ resource "aws_subnet" "private_subnet" {
 # Resource to create an ACL for public subnets currently allowing traffic both ways
 resource "aws_network_acl" "public_subnet_nacl" {
   vpc_id     = aws_vpc.main.id
-  subnet_ids = [for subnet_name, subnet_id in local.public_subnet_name2id_map : subnet_id]
+  subnet_ids = [for subnet in aws_subnet.public_subnet : subnet.id]
 
   egress {
     protocol   = -1
@@ -82,7 +82,7 @@ resource "aws_network_acl" "public_subnet_nacl" {
 # Resource to create an ACL for private subnets currently allowing traffic both ways
 resource "aws_network_acl" "private_subnet_nacl" {
   vpc_id     = aws_vpc.main.id
-  subnet_ids = [for subnet_name, subnet_id in local.private_subnet_name2id_map : subnet_id[0]]
+  subnet_ids = [for subnet in aws_subnet.private_subnet : subnet.id]
 
   egress {
     protocol   = -1

@@ -116,22 +116,31 @@ locals {
 
 locals {
   public_subnet_name2id_map = {
-    for subnetkey, subnetdetails in aws_subnet.public_subnet : subnetdetails.tags.Name => subnetdetails.id
+    for subnet_key, subnetdetails in aws_subnet.public_subnet : subnet_key => subnetdetails.id
   }
 }
 
-# locals {
-#   # exact match on purpose equals "my-purpose"
-#   private_subnet_name2id_map = {
-#     for subnet_key, subnet_details in aws_subnet.private_subnet :
-#     lookup(subnet_details.tags, "Name", "") => subnet_details.id
-#     if lookup(subnet_details.tags, "purpose", "") == "my-purpose"
-#   }
-# }
+locals {
+  private_web_subnet_map = {
+    for subnet_key, subnet_details in aws_subnet.private_subnet :
+    subnet_key => subnet_details.id
+    if lookup(subnet_details.tags, "purpose", "") == "web"
+  }
+}
 
 locals {
-  private_subnet_name2id_map = {
-    for subnetkey, subnetdetails in aws_subnet.private_subnet : subnetdetails.tags.Name => [subnetdetails.id, subnetdetails.tags.purpose]
+  private_app_subnet_map = {
+    for subnet_key, subnet_details in aws_subnet.private_subnet :
+    subnet_key => subnet_details.id
+    if lookup(subnet_details.tags, "purpose", "") == "app"
+  }
+}
+
+locals {
+  private_db_subnet_map = {
+    for subnet_key, subnet_details in aws_subnet.private_subnet :
+    subnet_key => subnet_details.id
+    if lookup(subnet_details.tags, "purpose", "") == "db"
   }
 }
 

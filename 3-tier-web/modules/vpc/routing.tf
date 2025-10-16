@@ -27,8 +27,8 @@ resource "aws_route_table" "pub_rt" {
 
 # Resource to create public Route table association to public subnets so that they can have route to internet
 resource "aws_route_table_association" "pub_rt_assoc" {
-  for_each       = local.public_subnet_name2id_map
-  subnet_id      = each.value
+  for_each       = aws_subnet.public_subnet
+  subnet_id      = each.value.id
   route_table_id = aws_route_table.pub_rt.id
 }
 
@@ -79,21 +79,22 @@ resource "aws_route_table" "pvt_db_rt" {
   )
 }
 
-# # Resource to create private Route table association to private subnets
-# resource "aws_route_table_association" "pvt_web_rt_assoc" {
-#   for_each       = local.private_subnet_name2id_map
-#   subnet_id      = each.value[1] == "web" ? each.value[0] : ""
-#   route_table_id = aws_route_table.pvt_web_rt.id
-# }
+# Resource to create private Route table association to private subnets
+resource "aws_route_table_association" "pvt_web_rt_assoc" {
+  for_each       = local.private_web_subnet_map
+  subnet_id      = each.value
+  route_table_id = aws_route_table.pvt_web_rt.id
+}
 
-# resource "aws_route_table_association" "pvt_app_rt_assoc" {
-#   for_each       = local.private_subnet_name2id_map
-#   subnet_id      = each.value[1] == "app" ? each.value[0] : ""
-#   route_table_id = aws_route_table.pvt_app_rt.id
-# }
+resource "aws_route_table_association" "pvt_app_rt_assoc" {
+  for_each       = local.private_app_subnet_map
+  subnet_id      = each.value
+  route_table_id = aws_route_table.pvt_app_rt.id
+}
 
-# resource "aws_route_table_association" "pvt_db_rt_assoc" {
-#   for_each       = local.private_subnet_name2id_map
-#   subnet_id      = each.value[1] == "db" ? each.value[0] : ""
-#   route_table_id = aws_route_table.pvt_db_rt.id
-# }
+resource "aws_route_table_association" "pvt_db_rt_assoc" {
+  for_each       = local.private_db_subnet_map
+  subnet_id      = each.value
+  route_table_id = aws_route_table.pvt_db_rt.id
+}
+
