@@ -22,9 +22,6 @@
 #   value = local.public_subnet_name2id_map
 # }
 
-# output "private_subnet_name2id_map" {
-#   value = local.private_subnet_name2id_map
-# }
 
 # output "public_subnet_id_list" {
 #   value = [for subnet_name, subnet_id in local.public_subnet_name2id_map : subnet_id]
