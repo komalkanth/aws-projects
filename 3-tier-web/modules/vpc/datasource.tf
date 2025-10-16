@@ -1,19 +1,6 @@
-# locals {
-#   az_ids_list = [for key, value in var.public_subnet_cidr_map : key]
-# }
+# Data source to get AZ names from AZ IDs for az1, az2 and az3
 
-# locals {
-#   az_ids_list = for_each in
-# }
-
-data "aws_availability_zones" "available" {
-  state = "available"
-  filter {
-    name   = "zone-id"
-    values = ["opt-in-not-required"]
-  }
+data "aws_availability_zone" "az_name_from_id" {
+  for_each = var.public_subnet_cidr_map
+  zone_id  = "${var.region_short_name}-${each.key}"
 }
-
-# output "az_ids_list" {
-#   value = local.az_ids_list
-# }
