@@ -53,10 +53,11 @@ locals {
   public_subnet_set = flatten([
     for selected_az, public_subnet_map in var.public_subnet_cidr_map : [
       for subnetnumber, attrib_map in public_subnet_map : {
-        availability_zone = selected_az
+        availability_zone = data.aws_availability_zone.az_name_from_id[selected_az].name
+        selected_az       = selected_az
         cidr_block        = attrib_map[0]
         purpose           = attrib_map[1]
-        subnet_number     = "pub-${substr(selected_az, -2, -1)}-${substr(subnetnumber, -1, -1)}"
+        subnet_number     = "pub-${substr(attrib_map[1], 0, 3)}-${substr(data.aws_availability_zone.az_name_from_id[selected_az].name, -2, -1)}"
       }
     ]
   ])
@@ -67,10 +68,11 @@ locals {
   private_subnet_set = flatten([
     for selected_az, private_subnet_map in var.private_subnet_cidr_map : [
       for subnetnumber, attrib_map in private_subnet_map : {
-        availability_zone = selected_az
+        availability_zone = data.aws_availability_zone.az_name_from_id[selected_az].name
+        selected_az       = selected_az
         cidr_block        = attrib_map[0]
         purpose           = attrib_map[1]
-        subnet_number     = "pvt-${substr(selected_az, -2, -1)}-${substr(subnetnumber, -1, -1)}"
+        subnet_number     = "pvt-${substr(attrib_map[1], 0, 3)}-${substr(data.aws_availability_zone.az_name_from_id[selected_az].name, -2, -1)}"
       }
     ]
   ])
