@@ -30,14 +30,15 @@ module "vpc" {
       "subnet-2" : ["10.75.6.0/24", "app"]
       "subnet-3" : ["10.75.9.0/24", "db"]
     }
-    "us-east-1c": {
+    "us-east-1c" : {
       "subnet-1" : ["10.75.4.0/24", "web"]
       "subnet-2" : ["10.75.7.0/24", "app"]
       "subnet-3" : ["10.75.10.0/24", "db"]
     }
   }
+  region_short_name = "use1"
   default_tags = {
-    environment  = "dev"
-    organization = "kkoncloud.net"
+    environment  = var.environment
+    organization = var.organization
   }
 }

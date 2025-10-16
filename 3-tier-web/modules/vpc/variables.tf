@@ -3,6 +3,10 @@ variable "region" {
   default = "us-east-1"
 }
 
+variable "region_short_name" {
+  default = ""
+}
+
 variable "vpc_main_cidr" {
   description = "The main IPv4 CIDR for VPC"
 }
