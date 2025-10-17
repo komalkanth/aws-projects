@@ -15,7 +15,7 @@ resource "aws_internet_gateway" "main_igw" {
 
 # Resource to create EIP for NAT Gateway, one per public subnet
 resource "aws_eip" "natgw_eip" {
-  for_each = aws_subnet.public_subnet
+  for_each = toset(local.public_subnets_with_natgw_enabled)
   domain   = "vpc"
 
   tags = merge(
@@ -25,11 +25,11 @@ resource "aws_eip" "natgw_eip" {
   )
 }
 
-# Resource to create NAT Gateway in each public subnet
+# # Resource to create NAT Gateway in each public subnet
 resource "aws_nat_gateway" "networking_natgw" {
-  for_each      = aws_subnet.public_subnet
+  for_each      = toset(local.public_subnets_with_natgw_enabled)
   allocation_id = aws_eip.natgw_eip[each.key].id
-  subnet_id     = each.value.id
+  subnet_id     = aws_subnet.public_subnet[each.key].id
 
   tags = merge(
     var.default_tags, {
