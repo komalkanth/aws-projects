@@ -1,10 +1,6 @@
-# output "region" {
-#   value = var.region
-# }
-
-# output "vpc_id" {
-#   value = aws_vpc.main.id
-# }
+output "vpc_id" {
+  value = aws_vpc.main.id
+}
 
 # output "organization" {
 #   value = var.organization
@@ -54,3 +50,11 @@
 # output "private_subnet_set" {
 #   value = local.private_subnet_set
 # }
+
+# output "public_subnets_with_natgw_enabled" {
+#   value = local.public_subnets_with_natgw_enabled
+# }
+
+output nat_gateway_ids {
+  value = { for natgw_key, natgw_details in aws_nat_gateway.networking_natgw : split("-", natgw_key)[1] => natgw_details.id }
+}
