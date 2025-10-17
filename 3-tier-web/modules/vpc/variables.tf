@@ -27,6 +27,12 @@ variable "private_subnet_cidr_map" {
   default     = {}
 }
 
+variable "natgw_enabled" {
+  type        = map(bool)
+  description = "Map to enable/disable NAT Gateway in specific AZs"
+  default     = {}
+}
+
 variable "environment" {}
 variable "organization" {}
 

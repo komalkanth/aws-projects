@@ -160,3 +160,27 @@ locals {
     for subnetkey, subnetdetails in aws_subnet.private_subnet : subnetdetails.tags.Name => { "${subnetdetails.cidr_block}" = subnetdetails.id }
   }
 }
+
+
+# Produces a list of public subnets where NAT Gateway is enabled based on natgw_enabled variable
+
+# # Input map below
+#   natgw_enabled = {
+#     "az1" : true
+#     "az2" : false
+#     "az3" : true
+#   }
+# # gets output like below
+#     "public_subnets_with_natgw_enabled = [
+#       "10.75.2.0/24-az1",
+#       "10.75.1.0/24-az3",
+#     ]
+
+locals {
+  public_subnets_with_natgw_enabled = flatten([
+    for az, subnet_map in var.public_subnet_cidr_map : [
+      for subnet_number, subnet_details in subnet_map : "${subnet_details[0]}-${az}"
+      if lookup(var.natgw_enabled, az, false) == true
+    ]
+  ])
+}
