@@ -36,6 +36,11 @@ module "vpc" {
       "subnet-3" : ["10.75.10.0/24", "db"]
     }
   }
+  natgw_enabled = {
+    "az1" : true
+    "az2" : true
+    "az3" : true
+  }
   region_short_name = "use1"
   default_tags = {
     environment  = var.environment
