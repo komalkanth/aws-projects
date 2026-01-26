@@ -1,0 +1,106 @@
+{
+  "vpcs": [
+    {
+      "name": "prod-use1-vpc-1",
+      "region": "us-east-1",
+      "vpcCidr": "10.0.0.0/24",
+      "subnets": [
+        {
+          "name": "subnet-1a",
+          "cidr": "10.0.0.0/25"
+        },
+        {
+          "name": "subnet-1b",
+          "cidr": "10.0.0.128/25"
+        }
+      ],
+      "internetGateway": true,
+      "internetAccessForAllSubnets": true
+    },
+    {
+      "name": "prod-use1-vpc-2",
+      "region": "us-east-1",
+      "vpcCidr": "10.0.1.0/24",
+      "subnets": [
+        {
+          "name": "subnet-1a",
+          "cidr": "10.0.1.0/25"
+        },
+        {
+          "name": "subnet-1b",
+          "cidr": "10.0.1.128/25"
+        }
+      ],
+      "internetGateway": true,
+      "internetAccessForAllSubnets": true
+    },
+    {
+      "name": "dev-use1-vpc-1",
+      "region": "us-east-1",
+      "vpcCidr": "10.0.10.0/24",
+      "subnets": [
+        {
+          "name": "subnet-1a",
+          "cidr": "10.0.10.0/25"
+        },
+        {
+          "name": "subnet-1b",
+          "cidr": "10.0.10.128/25"
+        }
+      ],
+      "internetGateway": true,
+      "internetAccessForAllSubnets": true
+    },
+    {
+      "name": "prod-use2-vpc-1",
+      "region": "us-east-2",
+      "vpcCidr": "10.0.2.0/24",
+      "subnets": [
+        {
+          "name": "subnet-1a",
+          "cidr": "10.0.2.0/25"
+        },
+        {
+          "name": "subnet-1b",
+          "cidr": "10.0.2.128/25"
+        }
+      ],
+      "internetGateway": true,
+      "internetAccessForAllSubnets": true
+    },
+    {
+      "name": "cust-use2-vpc-1",
+      "region": "us-east-2",
+      "vpcCidr": "10.0.20.0/24",
+      "subnets": [
+        {
+          "name": "subnet-1a",
+          "cidr": "10.0.20.0/25"
+        },
+        {
+          "name": "subnet-1b",
+          "cidr": "10.0.20.128/25"
+        }
+      ],
+      "internetGateway": true,
+      "internetAccessForAllSubnets": true
+    },
+    {
+      "name": "cust-use2-vpc-2",
+      "region": "us-east-2",
+      "vpcCidr": "10.0.21.0/24",
+      "subnets": [
+        {
+          "name": "subnet-1a",
+          "cidr": "10.0.21.0/25"
+        },
+        {
+          "name": "subnet-1b",
+          "cidr": "10.0.21.128/25"
+        }
+      ],
+      "internetGateway": true,
+      "internetAccessForAllSubnets": true
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "vpcs": [
+    {
+      "name": "insp-usw1-vpc-1",
+      "region": "us-west-1",
+      "vpcCidr": "10.0.100.0/23",
+      "internetGateway": true,
+      "subnets": [
+        {
+          "name": "fw-mgmt-subnet-1a",
+          "cidr": "10.0.100.0/27",
+          "az": "us-west-1a",
+          "type": "firewall-management",
+          "internetAccess": true
+        },
+        {
+          "name": "fw-mgmt-subnet-1b",
+          "cidr": "10.0.100.32/27",
+          "az": "us-west-1b",
+          "type": "firewall-management",
+          "internetAccess": true
+        },
+        {
+          "name": "fw-data-subnet-1a",
+          "cidr": "10.0.100.64/27",
+          "az": "us-west-1a",
+          "type": "firewall-data",
+          "internetAccess": false
+        },
+        {
+          "name": "fw-data-subnet-1b",
+          "cidr": "10.0.100.96/27",
+          "az": "us-west-1b",
+          "type": "firewall-data",
+          "internetAccess": false
+        },
+        {
+          "name": "gwlb-endpnt-subnet-1a",
+          "cidr": "10.0.100.128/27",
+          "az": "us-west-1a",
+          "type": "gateway-load-balancer-endpoint",
+          "internetAccess": false
+        },
+        {
+          "name": "gwlb-endpnt-subnet-1b",
+          "cidr": "10.0.100.160/27",
+          "az": "us-west-1b",
+          "type": "gateway-load-balancer-endpoint",
+          "internetAccess": false
+        },
+        {
+          "name": "core-network-subnet-1a",
+          "cidr": "10.0.100.192/27",
+          "az": "us-west-1a",
+          "type": "core-network",
+          "internetAccess": false
+        },
+        {
+          "name": "core-network-subnet-1b",
+          "cidr": "10.0.100.224/27",
+          "az": "us-west-1b",
+          "type": "core-network",
+          "internetAccess": false
+        }
+      ]
+    }
+  ]
+}
