@@ -98,6 +98,13 @@ fatal error: An error occurred (403) when calling the HeadObject operation: Forb
 ## Summary
 In this lab, we deployed a vulnerable web application (OWASP Juice Shop) on AWS using Terraform. We then simulated a SQL Injection attack to exfiltrate credentials and access sensitive data in S3. GuardDuty detected the malicious activity and triggered an automated remediation process using EventBridge and Lambda, which revoked the compromised credentials, demonstrating the effectiveness of AWS security services in protecting cloud resources.
 
+## Notifications for GuardDuty Findings
+While automated remediation is crucial, it's also important to be notified of security findings in real-time. In the next step, we will set up an SNS topic and subscription to receive email notifications for GuardDuty findings.
+
+We will look at one of the methods on how to do that in the next step: [Reporting GuardDuty Findings via email using SNS](STEP03.md)
+
+*Note: The Guardduty findings and the email notitifications are not immediate and may take a few minutes to appear.*
+
 ## Cleanup
 To avoid incurring ongoing costs, remember to destroy the Terraform-managed infrastructure once you are done with the lab:
 

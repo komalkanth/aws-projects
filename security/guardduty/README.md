@@ -167,3 +167,4 @@ terraform destroy
 I have broken the lab setup into two parts for easier understanding.
 - [Part 1: Terraform Setup for the Networking and Compute](STEP01.md)
 - [Part 2: Setting up the security components and Simulating an Attack and Observing GuardDuty](STEP02.md)
+- [Part 3: Reporting GuardDuty Findings via email using SNS](STEP03.md)
