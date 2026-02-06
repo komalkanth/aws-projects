@@ -13,6 +13,8 @@ We have configured Eventbridge to send a notification to AWS Lambda for auto-rem
 1. As part of our Terraform configuration in `eventbridge.tf`, we have already added an eventbridge rule that matches GuardDuty findings with event detail type `InstanceCredentialExfiltration.OutsideAWS` and `InstanceCredentialExfiltration.InsideAWS` and publishes them to AWS Lambda for auto-remediation.
 2. We will create another eventbridge rule `guardduty-email-rule` that matches all GuardDuty findings with similar finding types and publishes them to the SNS topic `guardduty-sns-email` for email notifications.
 
+*Note that you can add SNS as a target for the same eventbridge rule. We are creating a separate rule here for clarity and demonstration purposes.*
+
 <kbd> <img src="images/102_eventbridge_pattern.png" /> </kbd>
 
 <kbd> <img src="images/103_eventbridge_target.png" /> </kbd>
