@@ -284,3 +284,27 @@ aws ecs create-service \
 ```
 
 
+## Verification
+
+Once the service is created, it will start running our Wordpress container. You can check the status of the service and the tasks using the AWS Management Console or the AWS CLI.
+
+```bash
+aws ecs describe-services \
+    --cluster wordpress-cluster \
+    --services wordpress-service \
+    --query "services[0].{Status:status,DesiredCount:desiredCount,RunningCount:runningCount}" \
+    --output table \
+    --profile wpprofile
+```
+
+Since our service count is 1, we should see one task running. You can also check the logs of the container to ensure that Wordpress is running correctly.
+
+Once the task comes up and is healthy, you can access the Wordpress website using the DNS name of the Load Balancer. You can find the DNS name in the AWS Management Console under the Load Balancer details or by using the AWS CLI.
+
+```bash
+aws elbv2 describe-load-balancers \
+    --names OurApplicationLoadBalancer \
+    --query "LoadBalancers[0].DNSName" \
+    --output text \
+    --profile wpprofile
+```
