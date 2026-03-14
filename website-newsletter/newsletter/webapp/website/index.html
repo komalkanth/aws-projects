@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Subscribe to our newsletter for the latest updates and exclusive content.">
+    <title>Newsletter Subscription</title>
+
+    <style>
+        /* ==================== Reset & Base Styles ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fff5f0 0%, #ffffff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        /* ==================== Container ==================== */
+        .container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 760px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            min-height: 80vh;
+        }
+
+        /* ==================== Header ==================== */
+        .hero-image {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #f3d9c4;
+            background: #fffaf6;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .content-top {
+            text-align: left;
+        }
+
+        .brand-label {
+            display: inline-block;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #E67E22;
+            background: #fff3e6;
+            padding: 6px 10px;
+            border-radius: 999px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .hero-title {
+            font-size: 32px;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            color: #2d3748;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .service-card {
+            border: 1px solid #f3d9c4;
+            background: #fffaf6;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .service-card h3 {
+            font-size: 16px;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .service-card p {
+            font-size: 14px;
+            color: #5a6475;
+            line-height: 1.5;
+        }
+
+        .newsletter-section {
+            margin-top: auto;
+        }
+
+        .newsletter-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-header h2 {
+            font-size: 22px;
+            margin-bottom: 8px;
+            color: #2d3748;
+        }
+
+        .newsletter-header p {
+            font-size: 14px;
+            color: #718096;
+            line-height: 1.5;
+        }
+
+        /* ==================== Form Styles ==================== */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #2d3748;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        input[type="email"]:focus {
+            outline: none;
+            border-color: #FF8C42;
+            box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.1);
+        }
+
+        input[type="email"]:invalid:not(:placeholder-shown) {
+            border-color: #fc8181;
+        }
+
+        /* ==================== Button Styles ==================== */
+        button {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            background: #FF8C42;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        button:hover:not(:disabled) {
+            background: #E67E22;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 140, 66, 0.3);
+        }
+
+        button:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        /* ==================== Loading Spinner ==================== */
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ==================== Message Styles ==================== */
+        .message {
+            padding: 12px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-top: 15px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.success {
+            background: #c6f6d5;
+            color: #22543d;
+            border: 1px solid #9ae6b4;
+        }
+
+        .message.error {
+            background: #fed7d7;
+            color: #742a2a;
+            border: 1px solid #fc8181;
+        }
+
+        /* ==================== Responsive Design ==================== */
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .hero-title {
+                font-size: 26px;
+            }
+
+            input[type="email"],
+            button {
+                font-size: 16px;
+                padding: 12px 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+
+            .container {
+                padding: 25px 15px;
+            }
+
+            .hero-title {
+                font-size: 22px;
+            }
+
+            .hero-subtitle {
+                font-size: 14px;
+            }
+
+            input[type="email"],
+            button {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero-image">
+            <img src="images/01_banner.png" alt="AWS technical consulting banner">
+        </div>
+        <div class="content-top">
+            <span class="brand-label">AWS Technical Consulting</span>
+            <h1 class="hero-title">Cloud architecture and delivery for teams that move fast</h1>
+            <p class="hero-subtitle">
+                I help startups and mid-size teams build secure, cost-aware AWS foundations and ship confidently.
+                From landing zones to production reliability, I focus on simple, maintainable solutions.
+            </p>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>Architecture Reviews</h3>
+                    <p>Clear, practical guidance on resiliency, security, and scale.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Cost Optimization</h3>
+                    <p>Rightsize workloads, reduce waste, and keep budgets predictable.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Delivery Enablement</h3>
+                    <p>CI/CD, infrastructure as code, and repeatable release pipelines.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="newsletter-section">
+            <div class="newsletter-header">
+                <h2>Join the Newsletter</h2>
+                <p>Short AWS tips, architecture notes, and practical updates. No spam.</p>
+            </div>
+
+            <form id="newsletterForm" novalidate>
+                <div class="form-group">
+                    <label for="emailInput">Email Address</label>
+                    <input
+                        type="email"
+                        id="emailInput"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                        aria-label="Email address for newsletter subscription"
+                        aria-describedby="formMessage"
+                    />
+                </div>
+
+                <button type="submit" id="submitBtn" aria-label="Subscribe to newsletter">
+                    Subscribe
+                </button>
+
+                <div id="formMessage" class="message" role="alert" aria-live="polite"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ==================== Configuration ====================
+        // S3 static hosting cannot reach DynamoDB directly — this JS submits to an
+        // API Gateway endpoint which forwards to the Lambda function that writes to DynamoDB.
+        // UPDATE THIS with your real API Gateway endpoint before deploying.
+        const API_ENDPOINT = 'https://o94rttmkw5.execute-api.us-east-1.amazonaws.com/dev/webletter';
+
+        // RFC 5321/5322-aligned email validation:
+        //   - allows all valid local-part characters
+        //   - requires a proper domain with at least one labelled dot
+        //   - enforces a 2+ char TLD and a 254-char overall length limit
+        const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/
+
+        // ==================== DOM Elements ====================
+        const form = document.getElementById('newsletterForm');
+        const emailInput = document.getElementById('emailInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const formMessage = document.getElementById('formMessage');
+
+        // ==================== Helper Functions ====================
+
+        /**
+         * Validate email format against RFC 5321/5322 rules.
+         * Checks regex pattern AND enforces the 254-character maximum length.
+         * @param {string} email - Email address to validate
+         * @returns {boolean} True if valid, false otherwise
+         */
+        function validateEmail(email) {
+            const trimmed = email.trim();
+            return trimmed.length <= 254 && EMAIL_REGEX.test(trimmed);
+        }
+
+        /**
+         * Display message to user
+         * @param {string} message - Message text
+         * @param {string} type - Message type: 'success' or 'error'
+         * @param {number} duration - Duration to show message (ms), 0 for permanent
+         */
+        function showMessage(message, type, duration = 5000) {
+            formMessage.textContent = message;
+            formMessage.className = `message show ${type}`;
+
+            if (duration > 0) {
+                setTimeout(() => {
+                    formMessage.classList.remove('show');
+                }, duration);
+            }
+        }
+
+        /**
+         * Clear form and messages
+         */
+        function clearForm() {
+            emailInput.value = '';
+            formMessage.classList.remove('show');
+        }
+
+        /**
+         * Update button state (enabled/disabled with loading state)
+         * @param {boolean} isLoading - True if loading, false otherwise
+         */
+        function updateButtonState(isLoading) {
+            if (isLoading) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="spinner"></span>Subscribing...';
+            } else {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Subscribe';
+            }
+        }
+
+        // ==================== Event Listeners ====================
+
+        /**
+         * Clear error message when user starts typing
+         */
+        emailInput.addEventListener('input', () => {
+            if (formMessage.classList.contains('error')) {
+                formMessage.classList.remove('show');
+            }
+        });
+
+        /**
+         * Handle form submission
+         */
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+
+            // Client-side validation
+            if (!email) {
+                showMessage('Please enter your email address.', 'error', 0);
+                emailInput.focus();
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                showMessage('Please enter a valid email address.', 'error', 0);
+                emailInput.focus();
+                return;
+            }
+
+            // Update UI for submission
+            updateButtonState(true);
+
+            try {
+                // Send email + client-side submission timestamp to the API Gateway endpoint.
+                // The Lambda function will store both values in DynamoDB alongside its own
+                // server-side timestamp, giving you two useful data points:
+                //   - submittedAt  : moment the user clicked Subscribe (browser local time, UTC ISO)
+                //   - subscription_date : moment the Lambda persisted the record (server UTC ISO)
+                const submittedAt = new Date().toISOString();
+
+                const response = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, submittedAt }),
+                });
+
+                // Parse response
+                const data = await response.json();
+
+                // Handle both direct Lambda response and API Gateway wrapped response
+                // Direct response: { success: true, message: "...", email: "..." }
+                // Wrapped response: { statusCode: 200, headers: {...}, body: "{...}" }
+                let actualData = data;
+                let statusCode = response.status;
+
+                if (data.statusCode !== undefined && data.body !== undefined) {
+                    // API Gateway is returning wrapped Lambda response
+                    statusCode = data.statusCode;
+                    try {
+                        actualData = JSON.parse(data.body);
+                    } catch {
+                        actualData = data.body;
+                    }
+                }
+
+                if (statusCode >= 200 && statusCode < 300) {
+                    // Success response
+                    showMessage('Thank you! Check your email to confirm your subscription.', 'success', 5000);
+                    clearForm();
+                } else {
+                    // Error response from API
+                    const errorMessage = actualData.message || 'An error occurred. Please try again.';
+                    showMessage(errorMessage, 'error', 0);
+                }
+            } catch (error) {
+                // Network or parsing error
+                console.error('Subscription error:', error);
+                showMessage('Unable to subscribe at this time. Please try again later.', 'error', 0);
+            } finally {
+                // Reset button state
+                updateButtonState(false);
+                emailInput.focus();
+            }
+        });
+
+        // ==================== Initialization ====================
+        // Log API endpoint status in development
+        if (API_ENDPOINT.includes('your-api-gateway-endpoint')) {
+            console.warn('⚠️  API_ENDPOINT not configured. Please update the API_ENDPOINT variable in the script.');
+        }
+    </script>
+</body>
+</html>
